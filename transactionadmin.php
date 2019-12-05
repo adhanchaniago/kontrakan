@@ -7,7 +7,7 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.php">Mertojoyo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,11 +53,12 @@ if (!isset($_SESSION["login"])) {
         <div class="row">
             <div class="col-10 mx-auto">
                 <div class="table-responsive-lg">
-                    <table class="table table-hover text-light text-center shadow p-3 mb-5 bg-white rounded">
-                        <thead class="bg-dark text-light">
+                    <table class="table table-hover table-striped table-light text-center shadow p-3 mb-5 bg-white rounded">
+                        <thead class="bg-info text-light">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Transaction</th>
+                                <th scope="col">Date</th>
                                 <th scope="col">Direction</th>
                                 <th scope="col">Point</th>
                             </tr>

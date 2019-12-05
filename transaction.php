@@ -7,7 +7,7 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.php">Mertojoyo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,15 +49,27 @@ if (!isset($_SESSION["login"])) {
                     </div>
                 </div>
             </div>
-        </div><br>
+        </div>
+    <br>
         <div class="row">
-            <div class="col-10 mx-auto">
+            <div class="col-12 mx-auto">
                 <div class="table-responsive-lg">
-                    <table class="table table-hover text-light text-center shadow p-3 mb-5 bg-white rounded">
-                        <thead class="bg-dark text-light">
+                    <table class="table table-hover table-striped text-center shadow p-3 mb-5 bg-white rounded">
+                        <?php
+                        // 1564592400
+                        $awal = 1564592400;
+             //            for($i=53;$i<=53;$i++){
+             //                $query = "UPDATE transaksi SET tanggal='1575175525' WHERE id='$i'";
+					        // mysqli_query($conn, $query);
+             //            }
+                        // var_dump(mktime(11,45,25,12,1,2019));
+                        
+                        ?>
+                        <thead class="bg-info text-light">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Transaction</th>
+                                <th scope="col">Date</th>
                                 <th scope="col">Direction</th>
                                 <th scope="col">Point</th>
                             </tr>
@@ -72,7 +84,9 @@ if (!isset($_SESSION["login"])) {
         <div class="row">
 
         </div>
-    </div><br><br><br>
+
+        </div>
+    <br><br><br>
 </body>
 
 </html>

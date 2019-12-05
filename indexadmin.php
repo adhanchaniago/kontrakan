@@ -7,7 +7,7 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.php">Mertojoyo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,11 +45,11 @@ if (!isset($_SESSION["login"])) {
                     <div class="progress">
                         <div class="progress-bar bg-success" role="progressbar" style="width: <?= bulanan(); ?>%;" aria-valuenow="<?= bulanan(); ?>" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <small id="emailHelp" class="form-text text-muted" style="text-align:right">Bulanan</small>
+                    <small id="emailHelp" class="form-text text-muted" style="text-align:right"><?= rupiah(bulan()); ?>/<?= rupiah($maxbulanan+200000); ?></small>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: <?= kontrakan(); ?>%;" aria-valuenow="<?= kontrakan(); ?>" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <small id="emailHelp" class="form-text text-muted" style="text-align:right">Kontrakan</small>
+                    <small id="emailHelp" class="form-text text-muted" style="text-align:right"><?= rupiah(kontrak()); ?>/20.300.000</small>
                 </div>
             </div>
         </div>

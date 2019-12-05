@@ -1,8 +1,8 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "kontrakan");
-// $conn = mysqli_connect("sql302.epizy.com", "epiz_24458541", "kontrakan1234", "epiz_24458541_kontrakan");
-$maxbulanan = 1800000;
-$maxbulan = 300000;
+// $conn = mysqli_connect("localhost", "root", "", "kontrakan");
+$conn = mysqli_connect("sql302.epizy.com", "epiz_24458541", "kontrakan1234", "epiz_24458541_kontrakan");
+$maxbulanan = 2800000;  // ganti berkala $maxbulanan=($maxbulan*5)+$maxbulanmalik
+$maxbulan = 500000;     // ganti berkala
 
 function member()
 { }
@@ -13,13 +13,13 @@ function progressdata()
     $tampil = mysqli_query($conn, "SELECT * FROM anggota");
     $no = 1;
     foreach ($tampil as $org) {
-        // $maxbulan = 300000;
+        // $maxbulan = 400000;
         if ($org['nama'] == "Malik") {
             $maxbulan = $maxbulan - 200000;
             $maxbulanan = $maxbulanan - 200000;
         } else {
-            $maxbulan = 300000;
-            $maxbulanan = 1800000;
+            $maxbulan = 500000;     // ganti berkala
+            $maxbulanan = 2800000;  // ganti berkala
         }
         ?>
         <style>
@@ -50,7 +50,7 @@ function progressdata()
             <div class="progress border <?= color(persen($org['bulanan'], $maxbulan)) ?>">
                 <div class="progress-bar bg-success" role="progressbar" style="width: <?= persen($org['bulanan'], $maxbulan) ?>%;" aria-valuenow="<?php persen($org['bulanan'], $maxbulan) ?>" aria-valuemin="0" aria-valuemax="100"><?= persen($org['bulanan'], $maxbulan) ?>%</div>
             </div>
-            <small id="emailHelp" class="form-text text-muted" style="text-align:right"><?= rupiah($org['bulanan']) ?>/<?= $maxbulan; ?></small>
+            <small id="emailHelp" class="form-text text-muted" style="text-align:right"><?= rupiah($org['bulanan']) ?>/<?= rupiah($maxbulan); ?></small>
             <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: <?= persen($org['kontrakan'], $org['maxkontrakan']) ?>%;" aria-valuenow="<?= persen($org['kontrakan'], $org['maxkontrakan']) ?>" aria-valuemin="0" aria-valuemax="100"><?= persen($org['kontrakan'], $org['maxkontrakan']) ?>%</div>
             </div>
@@ -69,8 +69,9 @@ function progressdata()
         $nama = $_POST["name"];
         $arah = $_POST["direction"];
         $nominal = $_POST["point"];
+        $tanggal = time();
 
-        $query = "INSERT INTO transaksi VALUES ('','$nama','$arah','$nominal')";
+        $query = "INSERT INTO transaksi VALUES ('','$nama','$arah','$nominal','$tanggal')";
         mysqli_query($conn, $query);
     }
 
@@ -117,7 +118,7 @@ function progressdata()
     function transaction()
     {
         global $conn;
-        $t = mysqli_query($conn, "SELECT * FROM transaksi");
+        $t = mysqli_query($conn, "SELECT * FROM transaksi ORDER BY tanggal DESC");
         $no = 1;
         $angka = 1;
         foreach ($t as $temp) {
@@ -143,6 +144,7 @@ function progressdata()
                 ?>">
             <td scope="row"><?= $no; ?></td>
             <td><?= $temp['nama']; ?></td>
+            <td><?= date('j M Y', $temp['tanggal']); ?></td>
             <td><?= $temp['arah']; ?></td>
             <td>Rp. <?= rupiah($temp['nominal']); ?></td>
         </tr>
@@ -200,7 +202,7 @@ function kontrakan()
         $kontrakan = $kontrakan + $org['kontrakan'];
         $no++;
     }
-    $kontrakan = ceil($kontrakan = ($kontrakan * 100) / 20200000);
+    $kontrakan = ceil($kontrakan = ($kontrakan * 100) / 20300000);
     return $kontrakan;
 }
 
@@ -216,11 +218,33 @@ function bulanan()
             $maxbulan = $maxbulan - 200000;
             $maxbulanan = $maxbulanan - 200000;
         } else {
-            $maxbulan = 300000;
-            $maxbulanan = 1800000;
+            $maxbulan = 500000;     // ganti berkala
+            $maxbulanan = 2800000;  // ganti berkala
         }
         $no++;
     }
     $bulanan = ceil($bulanan = ($bulanan * 100) / $maxbulanan);
     return $bulanan;
+}
+
+function bulan(){
+    global $conn;
+    $tampil = mysqli_query($conn, "SELECT * FROM anggota");
+    foreach ($tampil as $org) :
+        $bulanan = $bulanan + $org['bulanan'];
+    endforeach;
+    return $bulanan;
+}
+
+function kontrak(){
+    global $conn;
+    $tampil = mysqli_query($conn, "SELECT * FROM anggota");
+    foreach ($tampil as $org) :
+        if($org['nama']=="Malik"){
+            $kontrakan = $kontrakan + 0;
+        }else{
+            $kontrakan = $kontrakan + $org['kontrakan'];
+        }
+    endforeach;
+    return $kontrakan;
 }
