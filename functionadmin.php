@@ -1,6 +1,6 @@
 <?php
-// $conn = mysqli_connect("localhost", "root", "", "kontrakan");
-$conn = mysqli_connect("sql302.epizy.com", "epiz_24458541", "kontrakan1234", "epiz_24458541_kontrakan");
+$conn = mysqli_connect("localhost", "root", "", "kontrakan");
+// $conn = mysqli_connect("sql302.epizy.com", "epiz_24458541", "kontrakan1234", "epiz_24458541_kontrakan");
 $maxbulanan = 2800000;  // ganti berkala $maxbulanan=($maxbulan*5)+$maxbulanmalik
 $maxbulan = 500000;     // ganti berkala
 
